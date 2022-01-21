@@ -1,33 +1,58 @@
-import { Pressable, StyleSheet, Text, TextInput,Image, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, Image, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import React from 'react';
 import { SCREEN_WIDTH } from '../screens/Dimentions';
+import { connect } from 'react-redux';
+import { emailChanged, passwordChanged, loginUser } from '../../redux/actions';
 
-const LoginComponent = () => {
-  const [userId, setUserId] = useState('')
-  const [password, setPassword] = useState('')
+
+const LoginComponent = ({
+  email,
+  password,
+  emailChanged,
+  passwordChanged,
+  loginUser,
+  error,
+  loading
+}) => {
+
+  const getError = () => {
+    if (error) {
+      return (
+        <View style={styles.errorView}>
+          <Text style={styles.errorText}>
+            Authentication Failed
+          </Text>
+        </View>
+      )
+    }
+    return null
+  }
   return (
     <View>
       <TextInput
         placeholder='Phone number, email address or username'
-        value={userId}
-        onChangeText={(text) => setUserId(text)}
+        value={email}
+        onChangeText={(text) => emailChanged(text)}
         style={styles.textInput}
       />
       <TextInput
         placeholder='Password'
         value={password}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={(text) => passwordChanged(text)}
         style={styles.textInput}
         secureTextEntry={true}
       />
-      <TouchableOpacity>
+      {getError()}
+      <TouchableOpacity onPress={() => loginUser(email, password)}>
         <View style={{
           ...styles.loginBtn,
-          opacity: userId == '' || password == '' ? 0.5 : 1
+          opacity: email == '' || password == '' ? 0.5 : 1
         }}>
-          <Text style={styles.loginText}>
-            Log In
-          </Text>
+          {loading
+            ? <ActivityIndicator size={20} color="white" />
+            : <Text style={styles.loginText}>
+              Log In
+            </Text>}
         </View>
       </TouchableOpacity>
       <View style={styles.forgotBtn}>
@@ -47,9 +72,9 @@ const LoginComponent = () => {
       <TouchableOpacity>
         <View style={styles.loginBtn}>
           <View style={styles.fbLogo}>
-            <Image 
-            style={{height: '100%', width: '100%'}}
-            source={require('../assets/icons/facebook.png')}/>
+            <Image
+              style={{ height: '100%', width: '100%' }}
+              source={require('../assets/icons/facebook.png')} />
           </View>
           <Text style={styles.loginText}>
             Log In With Facebook
@@ -60,7 +85,17 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+const mapStateToProps = ({ LoginDetails }) => {
+  const { email, password, loading, error } = LoginDetails
+  return { email, password, loading, error }
+}
+
+
+export default connect(mapStateToProps, {
+  emailChanged,
+  passwordChanged,
+  loginUser
+})(LoginComponent)
 
 const styles = StyleSheet.create({
   textInput: {
@@ -113,5 +148,16 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     marginRight: 5,
+  },
+  errorView: {
+    width: SCREEN_WIDTH,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5
+  },
+  errorText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red'
   }
 });

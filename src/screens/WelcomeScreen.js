@@ -4,12 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { SCREEN_WIDTH } from './Dimentions';
 import LoginComponent from '../components/LoginComponent';
 import SignUpComponent from '../components/SignUpComponent';
+import { connect } from 'react-redux';
 
 
 const WelcomeScreen = () => {
   const [login, setLogin] = useState(true)
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF'}}>
       <View style={styles.language}>
         <Text>English (United States)</Text>
       </View>
@@ -39,7 +40,7 @@ const WelcomeScreen = () => {
   );
 };
 
-export default WelcomeScreen;
+export default connect(null, {})(WelcomeScreen)
 
 const styles = StyleSheet.create({
   language: {
