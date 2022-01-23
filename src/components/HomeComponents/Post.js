@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { SCREEN_WIDTH } from '../screens/Dimentions';
+import {SCREEN_WIDTH} from '../../screens/Dimentions';
 import { Entypo, AntDesign, Ionicons, Feather } from '@expo/vector-icons';
 import { useState } from 'react';
 const Post = ({
@@ -36,7 +36,7 @@ const Post = ({
       <View style={styles.post}>
         <Image
           style={{height: '100%', width: '100%'}}
-          source={require('../assets/icons/facebook.png')}
+          source={require('../../assets/icons/facebook.png')}
         />
       </View>
       <View style={{ paddingHorizontal: 15 }}>
@@ -46,7 +46,7 @@ const Post = ({
               <AntDesign
                 name={liked ? 'heart' : 'hearto'}
                 size={30}
-                color="black"
+                color={liked ? 'red' : 'black'}
               />
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback >

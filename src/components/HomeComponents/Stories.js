@@ -1,7 +1,6 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { SCREEN_WIDTH } from '../screens/Dimentions';
-import { LinearGradient } from 'expo-linear-gradient';
+import {SCREEN_WIDTH} from '../../screens/Dimentions';
 
 const data = [
   {

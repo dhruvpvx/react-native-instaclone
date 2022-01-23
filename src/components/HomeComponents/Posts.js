@@ -1,6 +1,7 @@
 import { LoremIpsum } from 'lorem-ipsum';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Post from './Post';
+import Stories from './Stories';
 
 const lorem = new LoremIpsum({
   wordsPerSentence: {
@@ -94,11 +95,12 @@ const data = [
 
 const Posts = () => {
   return (
-    <View style={{paddingBottom: 160}}>
+    <View style={{ paddingBottom: 60 }}>
       <FlatList
         data={data}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
+          if (index == 0) { return <Stories /> }
           return (
             <Post
               username={item.username}
@@ -108,8 +110,8 @@ const Posts = () => {
               time={item.time}
             />
           )
-        }} 
-     />
+        }}
+      />
     </View>
   );
 };

@@ -1,14 +1,15 @@
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import React from 'react';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { SCREEN_WIDTH } from '../screens/Dimentions';
+import {SCREEN_WIDTH} from '../../screens/Dimentions';
+
 const Header = () => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.image}>
         <Image
           style={{ height: '100%', width: '100%' }}
-          source={require('../assets/icons/Instagram_title.png')}
+          source={require('../../assets/icons/Instagram_title.png')}
         />
       </View>
       <TouchableWithoutFeedback>
