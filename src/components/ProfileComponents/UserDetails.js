@@ -1,30 +1,37 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import React from 'react';
 import { SCREEN_WIDTH } from '../../screens/Dimentions';
 
-const UserDetails = () => {
+const UserDetails = ({username}) => {
   return (
-    <View style={styles.userDetails}>
-      <View>
+    <View>
+      <View style={styles.userDetails}>
         <View style={styles.userDp}>
 
         </View>
-        <Text>Username</Text>
+        <View style={styles.countDetails}>
+          <TouchableWithoutFeedback>
+            <View style={styles.count}>
+              <Text style={styles.countText}>5</Text>
+              <Text style={styles.countText}>Posts</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback>
+            <View style={styles.count}>
+              <Text style={styles.countText}>206</Text>
+              <Text style={styles.countText}>Followers</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback>
+            <View style={styles.count}>
+              <Text style={styles.countText}>244</Text>
+              <Text style={styles.countText}>Following</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
-      <View style={styles.countDetails}>
-        <View style={styles.count}>
-          <Text>5</Text>
-          <Text>Posts</Text>
-        </View>
-        <View style={styles.count}>
-          <Text>206</Text>
-          <Text>Followers</Text>
-        </View>
-        <View style={styles.count}>
-          <Text>244</Text>
-          <Text>Following</Text>
-        </View>
-      </View>
+      <Text style={{ fontWeight: 'bold' }}>{username}</Text>
+      <Text>User Bio</Text>
     </View>
   );
 };
@@ -34,10 +41,11 @@ export default UserDetails;
 const styles = StyleSheet.create({
   userDetails: {
     flexDirection: 'row',
-    width: SCREEN_WIDTH,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 25
+    paddingVertical: 5,
+    paddingRight: 15
   },
   userDp: {
     height: 75,
@@ -52,6 +60,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   count: {
-    alignItems: 'center'
+    alignItems: 'center',
+    fontSize: 20
+  },
+  countText: {
+    fontSize: 18,
+    fontWeight: '500'
   }
 });

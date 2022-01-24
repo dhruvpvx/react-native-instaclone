@@ -1,7 +1,8 @@
 import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import {SCREEN_WIDTH} from '../../screens/Dimentions';
+import { SCREEN_WIDTH } from '../../screens/Dimentions';
 import { Entypo, AntDesign, Ionicons, Feather } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 const Post = ({
   username,
   likesCount,
@@ -10,23 +11,27 @@ const Post = ({
   time,
 }) => {
   const [liked, setLiked] = useState(false)
+
+  const { navigate } = useNavigation()
   return (
     <View style={styles.postContainer}>
       <View style={styles.postHeader}>
-        <View style={styles.userDetails}>
-          <View style={{ ...styles.userdp, marginHorizontal: 15 }}>
+        <TouchableWithoutFeedback onPress={() => navigate('homeProfile', { username: username, self: false })}>
+          <View style={styles.userDetails}>
+            <View style={{ ...styles.userdp, marginHorizontal: 15 }}>
 
+            </View>
+            <View>
+              <Text style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: 'black'
+              }}>
+                {username}
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={{
-              fontSize: 18,
-              fontWeight: 'bold',
-              color: 'black'
-            }}>
-              {username}
-            </Text>
-          </View>
-        </View>
+        </TouchableWithoutFeedback>
         <Entypo
           name="dots-three-vertical"
           style={{ marginRight: 10 }}
@@ -35,7 +40,7 @@ const Post = ({
       </View>
       <View style={styles.post}>
         <Image
-          style={{height: '100%', width: '100%'}}
+          style={{ height: '100%', width: '100%' }}
           source={require('../../assets/icons/facebook.png')}
         />
       </View>

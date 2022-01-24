@@ -1,17 +1,17 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
 import { AntDesign, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import SCREEN_WIDTH from '../../screens/Dimentions'
+import { useNavigation } from '@react-navigation/native';
 
 
-const Header = () => {
-  const [self, setSelf] = useState(false);
+const Header = ({ self, username }) => {
+  const { pop } = useNavigation()
+  console.log(self, 'header');
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerDetails}>
         {self
           ? null
-          : <TouchableOpacity>
+          : <TouchableOpacity onPress={() => pop()}>
             <AntDesign
               name="arrowleft"
               size={35}
@@ -20,7 +20,7 @@ const Header = () => {
           </TouchableOpacity>
         }
         <Text style={styles.headerText}>
-          Username
+          {username}
         </Text>
       </View>
       {self
@@ -42,21 +42,20 @@ export default Header;
 
 const styles = StyleSheet.create({
   headerContainer: {
-    width: SCREEN_WIDTH,
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
     marginVertical: 15,
     alignItems: 'center'
   },
   headerDetails: {
-    width: '40%',
+    width: '30%',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between'
   },
   headerText: {
     fontWeight: 'bold',
     fontSize: 20,
-    marginLeft: 20
   }
 });
