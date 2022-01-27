@@ -51,14 +51,15 @@ const styles = StyleSheet.create({
     opacity: 0.6
   },
   titleView: {
-    height: 50,
-    width: SCREEN_WIDTH - 250,
-    marginBottom: 10
+    height: 65,
+    width: 200,
+    marginBottom: 10,
+    backgroundColor:'white'
   },
   container: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 200
+    justifyContent: 'center'
   },
   toggle: {
     flexDirection: 'row',

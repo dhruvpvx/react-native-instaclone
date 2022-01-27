@@ -1,11 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { AntDesign, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 
 const Header = ({ self, username }) => {
-  const { pop } = useNavigation()
-  console.log(self, 'header');
+  const { pop, navigate } = useNavigation()
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerDetails}>
@@ -24,11 +23,13 @@ const Header = ({ self, username }) => {
         </Text>
       </View>
       {self
-        ? <Octicons
-          name="three-bars"
-          size={35}
-          color="black"
-        />
+        ? <TouchableWithoutFeedback onPress={() => navigate('editProfile')}>
+          <Octicons
+            name="three-bars"
+            size={35}
+            color="black"
+          />
+        </TouchableWithoutFeedback>
         : <MaterialCommunityIcons
           name="dots-vertical"
           size={35}

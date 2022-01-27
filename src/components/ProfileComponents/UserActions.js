@@ -4,7 +4,6 @@ import { SCREEN_WIDTH } from '../../screens/Dimentions';
 
 const UserActions = ({ self }) => {
   const [isFollowed, setIsFollowed] = useState(true);
-  console.log(self, 'useraction');
   return (
       <View >
         {self

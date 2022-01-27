@@ -1,9 +1,8 @@
-import { Pressable, StyleSheet, Text, TextInput, Image, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, Image, TouchableOpacity, View, ActivityIndicator, Alert } from 'react-native';
 import React from 'react';
 import { SCREEN_WIDTH } from '../screens/Dimentions';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../../redux/actions';
-
+import { emailChanged, passwordChanged, loginUser, fbLogin } from '../../redux/actions';
 
 const LoginComponent = ({
   email,
@@ -12,7 +11,8 @@ const LoginComponent = ({
   passwordChanged,
   loginUser,
   error,
-  loading
+  loading,
+  fbLogin
 }) => {
 
   const getError = () => {
@@ -27,6 +27,29 @@ const LoginComponent = ({
     }
     return null
   }
+  // async function logIn() {
+  //   try {
+  //     await Facebook.initializeAsync({
+  //       appId: '243384021303127',
+  //     });
+  //     const { type, token } =
+  //       await Facebook.logInWithReadPermissionsAsync({
+  //         permissions: ['public_profile'],
+  //       });
+  //     if (type === 'success') {
+  //       // Get the user's name using Facebook's Graph API
+  //       const facebookCredential = auth.FacebookAuthProvider.credential(token)
+  //       auth().signInWithCredential(facebookCredential)
+  //       .then(() => Alert.alert('Logged in!'))
+  //       .catch((error) => Alert.alert(error.message))
+  //       ;
+  //     } else {
+  //       // type === 'cancel'
+  //     }
+  //   } catch ({ message }) {
+  //     alert(`Facebook Login Error: ${message}`);
+  //   }
+  // }
   return (
     <View>
       <TextInput
@@ -69,7 +92,7 @@ const LoginComponent = ({
         <Text> OR </Text>
         <View style={styles.orLine}></View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => logIn()}>
         <View style={styles.loginBtn}>
           <View style={styles.fbLogo}>
             <Image
@@ -94,14 +117,15 @@ const mapStateToProps = ({ LoginDetails }) => {
 export default connect(mapStateToProps, {
   emailChanged,
   passwordChanged,
-  loginUser
+  loginUser,
+  fbLogin
 })(LoginComponent)
 
 const styles = StyleSheet.create({
   textInput: {
     borderWidth: 0.8,
     marginTop: 10,
-    marginHorizontal: SCREEN_WIDTH - 400,
+    marginHorizontal: 0.0403935202845821 * SCREEN_WIDTH,
     paddingVertical: 10,
     paddingLeft: 15,
     borderRadius: 3,
@@ -110,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   loginBtn: {
-    marginHorizontal: SCREEN_WIDTH - 400,
+    marginHorizontal: 0.0403935202845821 * SCREEN_WIDTH,
     flexDirection: 'row',
     backgroundColor: '#405DE6',
     alignItems: 'center',
@@ -138,7 +162,7 @@ const styles = StyleSheet.create({
     height: 1
   },
   lineView: {
-    marginHorizontal: SCREEN_WIDTH - 400,
+    marginHorizontal: 0.0403935202845821 * SCREEN_WIDTH,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
