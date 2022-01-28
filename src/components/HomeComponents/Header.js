@@ -1,16 +1,20 @@
-import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import React from 'react';
-import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import {SCREEN_WIDTH} from '../../screens/Dimentions';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { SCREEN_WIDTH } from '../../screens/Dimentions';
+import { logOut } from '../../../redux/actions';
+import { connect } from 'react-redux';
 
-const Header = () => {
+const Header = ({ logOut }) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.image}>
-        <Image
-          style={{ height: '100%', width: '100%' }}
-          source={require('../../assets/icons/Instagram_title.png')}
-        />
+        <TouchableWithoutFeedback onPress={() => logOut()}>
+          <Image
+            style={{ height: '100%', width: '100%' }}
+            source={require('../../assets/icons/Instagram_title.png')}
+          />
+        </TouchableWithoutFeedback>
       </View>
       <TouchableWithoutFeedback>
         <MaterialCommunityIcons
@@ -23,7 +27,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default connect(null, { logOut })(Header);
 
 const styles = StyleSheet.create({
   headerContainer: {

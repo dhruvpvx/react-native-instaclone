@@ -1,4 +1,4 @@
-import { EMAIL_CHANGED, LOGIN_USER, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, PASSWORD_CHANGED } from "../types"
+import { EMAIL_CHANGED, LOG_OUT, LOGIN_USER, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, PASSWORD_CHANGED } from "../types"
 
 const INITIAL_STATE = {
   email: "1@1.com",
@@ -19,6 +19,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, error: true, loading: false, password: '' }
     case LOGIN_USER:
       return { ...state, loading: true }
+    case LOG_OUT:
+      return { ...state, user: null }
     default:
       return state
   }

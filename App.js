@@ -10,6 +10,7 @@ export default function App() {
   const firebaseConfig = {
     apiKey: "AIzaSyA9RHdcIjsThTlIPgCizza3oGYFo9wjzTE",
     authDomain: "instaclone-e09ea.firebaseapp.com",
+    databaseURL: "https://instaclone-e09ea-default-rtdb.firebaseio.com",
     projectId: "instaclone-e09ea",
     storageBucket: "instaclone-e09ea.appspot.com",
     messagingSenderId: "911504206190",

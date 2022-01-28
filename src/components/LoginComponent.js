@@ -27,29 +27,6 @@ const LoginComponent = ({
     }
     return null
   }
-  // async function logIn() {
-  //   try {
-  //     await Facebook.initializeAsync({
-  //       appId: '243384021303127',
-  //     });
-  //     const { type, token } =
-  //       await Facebook.logInWithReadPermissionsAsync({
-  //         permissions: ['public_profile'],
-  //       });
-  //     if (type === 'success') {
-  //       // Get the user's name using Facebook's Graph API
-  //       const facebookCredential = auth.FacebookAuthProvider.credential(token)
-  //       auth().signInWithCredential(facebookCredential)
-  //       .then(() => Alert.alert('Logged in!'))
-  //       .catch((error) => Alert.alert(error.message))
-  //       ;
-  //     } else {
-  //       // type === 'cancel'
-  //     }
-  //   } catch ({ message }) {
-  //     alert(`Facebook Login Error: ${message}`);
-  //   }
-  // }
   return (
     <View>
       <TextInput
@@ -92,7 +69,7 @@ const LoginComponent = ({
         <Text> OR </Text>
         <View style={styles.orLine}></View>
       </View>
-      <TouchableOpacity onPress={() => logIn()}>
+      <TouchableOpacity onPress={() => fbLogin()}>
         <View style={styles.loginBtn}>
           <View style={styles.fbLogo}>
             <Image
