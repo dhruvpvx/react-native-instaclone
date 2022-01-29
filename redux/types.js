@@ -5,3 +5,4 @@ export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const USERNAME_UPDATED = 'USERNAME_UPDATED';
+export const IS_UPLOADING = 'IS_UPLOADING';
