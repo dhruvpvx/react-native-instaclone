@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React  from 'react';
 import Header from '../../components/ProfileComponents/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import UserDetails from '../../components/ProfileComponents/UserDetails';

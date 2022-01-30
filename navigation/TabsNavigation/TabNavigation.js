@@ -5,8 +5,8 @@ import {
   FontAwesome
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AddPostScreen from "../../src/screens/TabScreens/AddPostScreen";
 import ActivityNavigation from "./ActivityNavigation";
+import AddPostNavigation from "./AddPostNavigation";
 import HomeNavigation from "./HomeNavigation";
 import ProfileNavigation from "./ProfileNavigation";
 import SearchNavigation from "./SearchNavigation";
@@ -51,8 +51,8 @@ const TabNavigation = () => {
         }}
       />
       <Screen
-        name='reels'
-        component={AddPostScreen}
+        name='addPost'
+        component={AddPostNavigation}
         options={{
           tabBarShowLabel: false,
           headerShown: false,

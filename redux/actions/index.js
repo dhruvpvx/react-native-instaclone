@@ -1,4 +1,16 @@
-import { EMAIL_CHANGED, USERNAME_UPDATED, LOG_OUT, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER, LOGIN_USER_FAIL } from "../types"
+import { 
+  EMAIL_CHANGED, 
+  USERNAME_UPDATED, 
+  LOG_OUT,
+  PASSWORD_CHANGED, 
+  LOGIN_USER_SUCCESS, 
+  LOGIN_USER, 
+  LOGIN_USER_FAIL, 
+  IS_UPLOADING, 
+  IS_UPLOADED, 
+  UPLOAD_FAILED,
+  POST_UPLOADED
+} from "../types"
 import { FacebookAuthProvider, getAuth, onAuthStateChanged, signInWithCredential, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { child, getDatabase, push, ref as databaseRef, set, update } from 'firebase/database'
 import { initializeAsync, logInWithReadPermissionsAsync } from 'expo-facebook'
@@ -69,7 +81,7 @@ export const loginUser = (email, password) => {
   }
 }
 
-export const createNewPost = (image, caption = 'No Caption') => {
+export const createNewPost = (image, caption) => {
   return async dispatch => {
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -98,9 +110,10 @@ export const createNewPost = (image, caption = 'No Caption') => {
     const metadata = {
       contentType: 'image/jpeg',
     };
+    dispatch({ type: IS_UPLOADING })
     uploadBytes(createStorageRef, file, metadata)
       .then(({ metadata }) => {
-        getDownloadURL(storageRef(storage, `/users/${userId}/posts/${file.name}`))
+        getDownloadURL(createStorageRef)
           .then(async url => {
             const db = getDatabase();
             await set(push(databaseRef(db, `users/${userId}/posts`)),
@@ -111,12 +124,15 @@ export const createNewPost = (image, caption = 'No Caption') => {
                 post_likes_count: 0,
                 post_comments_count: 0,
               })
-              .then(() => console.log('Post Added In Realtime Database'))
-              .catch((error) => console.log('Not Success1'))
+              .then(() => dispatch({ type: IS_UPLOADED }))
+              .catch((error) => dispatch({ type: UPLOAD_FAILED, payload: error.message }))
           })
-          .catch((error) => console.log(error))
+          .catch((error) => dispatch({ type: UPLOAD_FAILED, payload: error.message }))
       })
-      .catch((error) => console.log('Not Success3'))
+      .catch((error) => dispatch({ type: UPLOAD_FAILED, payload: error.message }))
   }
+}
 
+export const postUploaded = () => {
+  return { type: POST_UPLOADED}
 }

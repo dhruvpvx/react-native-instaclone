@@ -6,3 +6,6 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const USERNAME_UPDATED = 'USERNAME_UPDATED';
 export const IS_UPLOADING = 'IS_UPLOADING';
+export const IS_UPLOADED = 'IS_UPLOADED';
+export const UPLOAD_FAILED = 'UPLOAD_FAILED';
+export const POST_UPLOADED = 'POST_UPLOADED';
